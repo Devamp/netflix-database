@@ -14,6 +14,8 @@ showsList = {}
 countriesList = {}
 # Maps [Genre Name] -> [GenreID]
 genresList = {}
+# Maps [Cast Name] -> [CastID]
+castsList = {}
 
 
 def getNetflixData(file_path):
@@ -131,6 +133,7 @@ def createMoviesDirectorsTable(data):
                         dirID = directorsList[d]
                     else:
                         directorsList[d] = dirID
+                        idCounter += 1  # increment id counter
 
                     # create row which will be written to csv using data and indexing the correct elements
                     row = [
@@ -141,8 +144,6 @@ def createMoviesDirectorsTable(data):
                         ],  # move name (gotten from moviesList hashtable)
                     ]
                     writer.writerow(row)  # write the row to csv
-
-                    idCounter += 1  # increment id counter
 
 
 def createShowsDirectorsTable(data):
@@ -155,8 +156,6 @@ def createShowsDirectorsTable(data):
             "ShowID",
         ]
 
-        idCounter = 1  # to count primary key
-
         writer.writerow(header)  # first write header
 
         for rowIdx in range(len(data)):  # loop through the data
@@ -167,9 +166,10 @@ def createShowsDirectorsTable(data):
                 if data[rowIdx][3] == "":  # skip null directors
                     continue
 
+                dirID = max(directorsList.values()) + 1
+
                 # for each director in the current movie
                 for d in directors:
-                    dirID = idCounter
                     d = d.strip()
 
                     if (
@@ -178,6 +178,7 @@ def createShowsDirectorsTable(data):
                         dirID = directorsList[d]
                     else:
                         directorsList[d] = dirID
+                        dirID += 1
 
                     # create row which will be written to csv using data and indexing the correct elements
                     row = [
@@ -189,17 +190,91 @@ def createShowsDirectorsTable(data):
                     ]
                     writer.writerow(row)  # write the row to csv
 
-                    idCounter += 1  # increment id counter
-
 
 def createMovieCastTable(data):
     with open("./results/movie_cast.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)  # csv writer for this file
 
+        header = [  # header for the cast csv file
+            "CastID",
+            "Name",
+            "MovieID",
+        ]
+
+        idCounter = 1  # to count primary key
+
+        writer.writerow(header)  # first write header
+
+        for rowIdx in range(len(data)):  # loop through the data
+            if data[rowIdx][1] == "Movie":  # if the data row is a "Movie"
+                # split cast string into a list dilimited at ','
+                casts = data[rowIdx][4].split(",")
+
+                if data[rowIdx][4] == "":
+                    continue
+
+                # for each cast in the current movie
+                for c in casts:
+                    castID = idCounter
+                    c = c.strip()
+
+                    if c in castsList:  # if cast is already been seen, use their id
+                        castID = castsList[c]
+                    else:
+                        castsList[c] = castID
+                        idCounter += 1  # increment id counter
+
+                    # create row which will be written to csv using data and indexing the correct elements
+                    row = [
+                        castID,  # cast id (either new or old)
+                        c,  # cast name
+                        moviesList[
+                            data[rowIdx][2]
+                        ],  # movie name (gotten from moviesList hashtable)
+                    ]
+                    writer.writerow(row)  # write the row to csv
+
 
 def createShowCastTable(data):
     with open("./results/show_cast.csv", "w", newline="") as csvfile:
         writer = csv.writer(csvfile)  # csv writer for this file
+
+        header = [  # header for the cast csv file
+            "CastID",
+            "Name",
+            "ShowID",
+        ]
+
+        writer.writerow(header)  # first write header
+
+        for rowIdx in range(len(data)):  # loop through the data
+            if data[rowIdx][1] == "TV Show":  # if the data row is a "TV Show"
+                # split cast string into a list dilimited at ','
+                casts = data[rowIdx][4].split(",")
+
+                if data[rowIdx][4] == "":
+                    continue
+
+                castID = max(castsList.values()) + 1
+                # for each cast in the current movie
+                for c in casts:
+                    c = c.strip()
+
+                    if c in castsList:  # if cast is already been seen, use their id
+                        castID = castsList[c]
+                    else:
+                        castsList[c] = castID
+                        castID += 1
+
+                    # create row which will be written to csv using data and indexing the correct elements
+                    row = [
+                        castID,  # cast id (either new or old)
+                        c,  # cast name
+                        showsList[
+                            data[rowIdx][2]
+                        ],  # show name (gotten from showList hashtable)
+                    ]
+                    writer.writerow(row)  # write the row to csv
 
 
 def createGenresTable(data):
