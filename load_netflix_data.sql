@@ -73,26 +73,27 @@ CREATE TABLE countries (
 );
 
 -- Load data from CSV files
-COPY movies (Name, Date_Added, Release_Year, Rating, Duration, Description)
+\COPY movies (Name, Date_Added, Release_Year, Rating, Duration, Description)
 FROM './results/movies.csv' DELIMITER ',' CSV HEADER;
 
-COPY movie_directors (Name, MovieID)
+\COPY movie_directors (Name, MovieID)
 FROM './results/movie_directors.csv' DELIMITER ',' CSV HEADER;
 
-COPY movie_cast (Name, MovieID)
+\COPY movie_cast (Name, MovieID)
 FROM './results/movie_cast.csv' DELIMITER ',' CSV HEADER;
 
-COPY shows (Name, Date_Added, Release_Year, Rating, Duration, Description)
+\COPY shows (Name, Date_Added, Release_Year, Rating, Duration, Description)
 FROM './results/shows.csv' DELIMITER ',' CSV HEADER;
 
-COPY show_directors (Name, ShowID)
+\COPY show_directors (Name, ShowID)
 FROM './results/show_directors.csv' DELIMITER ',' CSV HEADER;
 
-COPY show_cast (Name, ShowID)
+\COPY show_cast (Name, ShowID)
 FROM './results/show_cast.csv' DELIMITER ',' CSV HEADER;
 
-COPY genres (Name, ShowID, MovieID)
+\COPY genres (Name, ShowID, MovieID)
 FROM './results/genres.csv' DELIMITER ',' CSV HEADER;
 
-COPY countries (Name, ShowID, MovieID)
+\COPY countries (Name, ShowID, MovieID)
 FROM './results/countries.csv' DELIMITER ',' CSV HEADER;
+
