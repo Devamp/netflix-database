@@ -166,8 +166,6 @@ def createShowsDirectorsTable(data):
                 if data[rowIdx][3] == "":  # skip null directors
                     continue
 
-                dirID = max(directorsList.values()) + 1
-
                 # for each director in the current movie
                 for d in directors:
                     d = d.strip()
@@ -177,8 +175,7 @@ def createShowsDirectorsTable(data):
                     ):  # if director is already been seen, use their id
                         dirID = directorsList[d]
                     else:
-                        directorsList[d] = dirID
-                        dirID += 1
+                        directorsList[d] = max(directorsList.values()) + 1
 
                     # create row which will be written to csv using data and indexing the correct elements
                     row = [
@@ -255,7 +252,6 @@ def createShowCastTable(data):
                 if data[rowIdx][4] == "":
                     continue
 
-                castID = max(castsList.values()) + 1
                 # for each cast in the current movie
                 for c in casts:
                     c = c.strip()
@@ -263,8 +259,7 @@ def createShowCastTable(data):
                     if c in castsList:  # if cast is already been seen, use their id
                         castID = castsList[c]
                     else:
-                        castsList[c] = castID
-                        castID += 1
+                        castsList[c] = castID = max(castsList.values()) + 1
 
                     # create row which will be written to csv using data and indexing the correct elements
                     row = [

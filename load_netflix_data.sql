@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS netflix_movies_shows.movie_cast CASCADE;
 DROP TABLE IF EXISTS netflix_movies_shows.shows CASCADE;
 
 -- Create tables
-CREATE TABLE movies (
+CREATE TABLE netflix_movies_shows.movies (
     MovieID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Date_Added DATE,
@@ -24,19 +24,19 @@ CREATE TABLE movies (
     Description TEXT
 );
 
-CREATE TABLE movie_directors (
-    DirectorID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.movie_directors (
+    DirectorID INTEGER,
     Name VARCHAR(255),
     MovieID INTEGER REFERENCES movies(MovieID)
 );
 
-CREATE TABLE movie_cast (
-    CastID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.movie_cast (
+    CastID INTEGER,
     Name VARCHAR(255),
     MovieID INTEGER REFERENCES movies(MovieID)
 );
 
-CREATE TABLE shows (
+CREATE TABLE netflix_movies_shows.shows (
     ShowID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Date_Added DATE,
@@ -46,27 +46,27 @@ CREATE TABLE shows (
     Description TEXT
 );
 
-CREATE TABLE show_directors (
-    DirectorID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.show_directors (
+    DirectorID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID)
 );
 
-CREATE TABLE show_cast (
-    CastID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.show_cast (
+    CastID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID)
 );
 
-CREATE TABLE genres (
-    GenreID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.genres (
+    GenreID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID),
     MovieID INTEGER REFERENCES movies(MovieID)
 );
 
-CREATE TABLE countries (
-    CountryID SERIAL PRIMARY KEY,
+CREATE TABLE netflix_movies_shows.countries (
+    CountryID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID),
     MovieID INTEGER REFERENCES movies(MovieID)
@@ -81,5 +81,3 @@ CREATE TABLE countries (
 \COPY show_cast FROM './results/show_cast.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY genres FROM './results/genres.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY countries FROM './results/countries.csv' WITH DELIMITER ',' CSV HEADER;
-
-
