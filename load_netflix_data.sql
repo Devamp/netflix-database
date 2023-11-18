@@ -33,7 +33,7 @@ CREATE TABLE netflix_movies_shows.movie_directors (
 CREATE TABLE netflix_movies_shows.movie_cast (
     CastID INTEGER,
     Name VARCHAR(255),
-    MovieID INTEGER REFERENCES movies(MovieID)
+    MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
 CREATE TABLE netflix_movies_shows.shows (
@@ -49,27 +49,27 @@ CREATE TABLE netflix_movies_shows.shows (
 CREATE TABLE netflix_movies_shows.show_directors (
     DirectorID INTEGER,
     Name VARCHAR(255),
-    ShowID INTEGER REFERENCES shows(ShowID)
+    ShowID INTEGER REFERENCES netflix_movies_shows.shows(ShowID)
 );
 
 CREATE TABLE netflix_movies_shows.show_cast (
     CastID INTEGER,
     Name VARCHAR(255),
-    ShowID INTEGER REFERENCES shows(ShowID)
+    ShowID INTEGER REFERENCES netflix_movies_shows.shows(ShowID)
 );
 
 CREATE TABLE netflix_movies_shows.genres (
     GenreID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID),
-    MovieID INTEGER REFERENCES movies(MovieID)
+    MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
 CREATE TABLE netflix_movies_shows.countries (
     CountryID INTEGER,
     Name VARCHAR(255),
     ShowID INTEGER REFERENCES shows(ShowID),
-    MovieID INTEGER REFERENCES movies(MovieID)
+    MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
 -- Load data from CSV files
