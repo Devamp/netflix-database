@@ -61,16 +61,17 @@ CREATE TABLE netflix_movies_shows.show_cast (
 CREATE TABLE netflix_movies_shows.genres (
     GenreID INTEGER,
     Name VARCHAR(255),
-    ShowID INTEGER REFERENCES shows(ShowID),
+    ShowID INTEGER REFERENCES netflix_movies_shows.shows(ShowID),
     MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
 CREATE TABLE netflix_movies_shows.countries (
     CountryID INTEGER,
     Name VARCHAR(255),
-    ShowID INTEGER REFERENCES shows(ShowID),
+    ShowID INTEGER REFERENCES netflix_movies_shows.shows(ShowID),
     MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
+
 
 -- Load data from CSV files
 \COPY movies FROM './results/movies.csv' WITH DELIMITER ',' CSV HEADER;
