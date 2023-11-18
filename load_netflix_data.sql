@@ -27,7 +27,7 @@ CREATE TABLE netflix_movies_shows.movies (
 CREATE TABLE netflix_movies_shows.movie_directors (
     DirectorID INTEGER,
     Name VARCHAR(255),
-    MovieID INTEGER REFERENCES movies(MovieID)
+    MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
 CREATE TABLE netflix_movies_shows.movie_cast (
