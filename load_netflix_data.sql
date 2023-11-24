@@ -72,14 +72,6 @@ CREATE TABLE netflix_movies_shows.countries (
     MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
--- ALTER TABLE netflix_movies_shows.countries DROP CONSTRAINT countries_pkey;
--- ALTER TABLE netflix_movies_shows.show_directors DROP CONSTRAINT show_directors_pkey;
--- ALTER TABLE netflix_movies_shows.movie_directors DROP CONSTRAINT movie_directors_pkey;
--- ALTER TABLE netflix_movies_shows.genres DROP CONSTRAINT genres_pkey;
--- ALTER TABLE netflix_movies_shows.show_cast DROP CONSTRAINT show_cast_pkey;
--- ALTER TABLE netflix_movies_shows.movie_cast DROP CONSTRAINT movie_cast_pkey;
-
-
 -- Load data from CSV files
 \COPY netflix_movies_shows.movies FROM '~/netflix-database/results/movies.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY netflix_movies_shows.movie_directors FROM '~/netflix-database/results/movie_directors.csv' WITH DELIMITER ',' CSV HEADER;
@@ -89,13 +81,3 @@ CREATE TABLE netflix_movies_shows.countries (
 \COPY netflix_movies_shows.show_cast FROM '~/netflix-database/results/show_cast.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY netflix_movies_shows.genres FROM '~/netflix-database/results/genres.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY netflix_movies_shows.countries FROM '~/netflix-database/results/countries.csv' WITH DELIMITER ',' CSV HEADER;
-
-
-SELECT COUNT(*) FROM netflix_movies_shows.countries;
-SELECT COUNT(*) FROM netflix_movies_shows.show_directors;
-SELECT COUNT(*) FROM netflix_movies_shows.movie_directors;
-SELECT COUNT(*) FROM netflix_movies_shows.genres;
-SELECT COUNT(*) FROM netflix_movies_shows.show_cast;
-SELECT COUNT(*) FROM netflix_movies_shows.movie_cast;
-SELECT COUNT(*) FROM netflix_movies_shows.movies;
-SELECT COUNT(*) FROM netflix_movies_shows.shows;
