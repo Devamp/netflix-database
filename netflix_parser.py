@@ -23,6 +23,11 @@ def getNetflixData(file_path):
         data = list(csv.reader(csvfile))
     return data
 
+def toInt(data):
+    i = data.split()
+    if len(i) > 0:
+        return int(i[0])
+
 
 def createMoviesTable(data):
     with open("./results/movies.csv", "w", newline="") as csvfile:
@@ -34,7 +39,7 @@ def createMoviesTable(data):
             "Date_Added",
             "Release_Year",
             "Rating",
-            "Duration",
+            "Duration(minutes)",
             "Description",
         ]
 
@@ -50,7 +55,7 @@ def createMoviesTable(data):
                     data[rowIdx][6],  # Data Added
                     data[rowIdx][7],  # Release Year
                     data[rowIdx][8],  # Rating
-                    data[rowIdx][9],  # Duration
+                    toInt(data[rowIdx][9]),  # Duration
                     data[rowIdx][11],  # Description
                 ]
 
@@ -72,7 +77,7 @@ def createShowsTable(data):
             "Date_Added",
             "Release_Year",
             "Rating",
-            "Duration",
+            "Duration(seasons)",
             "Description",
         ]
 
@@ -88,7 +93,7 @@ def createShowsTable(data):
                     data[rowIdx][6],  # Data Added
                     data[rowIdx][7],  # Release Year
                     data[rowIdx][8],  # Rating
-                    data[rowIdx][9],  # Duration
+                    toInt(data[rowIdx][9]),  # Duration
                     data[rowIdx][11],  # Description
                 ]
 

@@ -4,15 +4,6 @@ DROP SCHEMA IF EXISTS netflix_movies_shows CASCADE;
 -- Create schema
 CREATE SCHEMA netflix_movies_shows;
 
-DROP TABLE IF EXISTS netflix_movies_shows.movies CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.movie_directors CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.genres CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.countries CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.show_cast CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.show_directors CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.movie_cast CASCADE;
-DROP TABLE IF EXISTS netflix_movies_shows.shows CASCADE;
-
 -- Create tables
 CREATE TABLE netflix_movies_shows.movies (
     MovieID SERIAL PRIMARY KEY,
@@ -20,7 +11,7 @@ CREATE TABLE netflix_movies_shows.movies (
     Date_Added DATE,
     Release_Year INTEGER,
     Rating VARCHAR(124),
-    Duration VARCHAR(124),
+    Duration INTEGER,
     Description TEXT
 );
 
@@ -42,7 +33,7 @@ CREATE TABLE netflix_movies_shows.shows (
     Date_Added DATE,
     Release_Year INTEGER,
     Rating VARCHAR(124),
-    Duration VARCHAR(124),
+    Duration INTEGER,
     Description TEXT
 );
 
