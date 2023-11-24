@@ -72,13 +72,30 @@ CREATE TABLE netflix_movies_shows.countries (
     MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
+ALTER TABLE netflix_movies_shows.countries DROP CONSTRAINT countries_pkey;
+ALTER TABLE netflix_movies_shows.show_directors DROP CONSTRAINT show_directors_pkey;
+ALTER TABLE netflix_movies_shows.movie_directors DROP CONSTRAINT movie_directors_pkey;
+ALTER TABLE netflix_movies_shows.genres DROP CONSTRAINT genres_pkey;
+ALTER TABLE netflix_movies_shows.show_cast DROP CONSTRAINT show_cast_pkey;
+ALTER TABLE netflix_movies_shows.movie_cast DROP CONSTRAINT movie_cast_pkey;
+
+
+SELECT COUNT(*) FROM netflix_movies_shows.countries;
+SELECT COUNT(*) FROM netflix_movies_shows.show_directors;
+SELECT COUNT(*) FROM netflix_movies_shows.movie_directors;
+SELECT COUNT(*) FROM netflix_movies_shows.genres;
+SELECT COUNT(*) FROM netflix_movies_shows.show_cast;
+SELECT COUNT(*) FROM netflix_movies_shows.movie_cast;
+SELECT COUNT(*) FROM netflix_movies_shows.movies;
+SELECT COUNT(*) FROM netflix_movies_shows.shows;
+
 
 -- Load data from CSV files
-\COPY movies FROM './results/movies.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY movie_directors FROM './results/movie_directors.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY movie_cast FROM './results/movie_cast.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY shows FROM './results/shows.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY show_directors FROM './results/show_directors.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY show_cast FROM './results/show_cast.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY genres FROM './results/genres.csv' WITH DELIMITER ',' CSV HEADER;
-\COPY countries FROM './results/countries.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.movies FROM './results/movies.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.movie_directors FROM './results/movie_directors.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.movie_cast FROM './results/movie_cast.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.shows FROM './results/shows.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.show_directors FROM './results/show_directors.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.show_cast FROM './results/show_cast.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.genres FROM './results/genres.csv' WITH DELIMITER ',' CSV HEADER;
+\COPY netflix_movies_shows.countries FROM './results/countries.csv' WITH DELIMITER ',' CSV HEADER;
