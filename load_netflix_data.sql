@@ -63,8 +63,18 @@ CREATE TABLE netflix_movies_shows.countries (
     MovieID INTEGER REFERENCES netflix_movies_shows.movies(MovieID)
 );
 
+CREATE VIEW movies_View AS
+SELECT MovieID, Name, Date_Added, Release_Year, Rating, Duration, Description
+FROM netflix_movies_shows.movies;
+
+CREATE VIEW movie_directors_view AS
+SELECT DirectorID, Name, MovieID
+FROM netflix_movies_shows.movie_directors;
+
+
+
 -- Load data from CSV files
-\COPY netflix_movies_shows.movies FROM '~/netflix-database/results/movies.csv' WITH DELIMITER ',' CSV HEADER;
+
 \COPY netflix_movies_shows.movie_directors FROM '~/netflix-database/results/movie_directors.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY netflix_movies_shows.movie_cast FROM '~/netflix-database/results/movie_cast.csv' WITH DELIMITER ',' CSV HEADER;
 \COPY netflix_movies_shows.shows FROM '~/netflix-database/results/shows.csv' WITH DELIMITER ',' CSV HEADER;
